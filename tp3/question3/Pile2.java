@@ -6,36 +6,73 @@ import question1.PileVideException;
 import java.util.Stack;
 
 public class Pile2<T> implements PileI<T>{
-    /** par dÃ©lÃ©gation : utilisation de la class Stack */
+    /** par délégation : utilisation de la class Stack */
     private Stack<T> stk;
-    /** la capacitÃ© de la pile */
-    private int capacitÃ©;
-
-    /** CrÃ©ation d'une pile.
-     * @param taille la "taille maximale" de la pile, doit Ãªtre > 0
+    /** la capacité de la pile */
+    private int capacite;
+    /** Création d'une pile.
+     * @param taille la "taille maximale" de la pile, doit être > 0
      */
     public Pile2(int taille){
-        // Ã  complÃ©ter
+        // à compléter
+        if(taille <= 0)
+            taille = CAPACITE_PAR_DEFAUT;
+        this.capacite = taille;
+        stk = new Stack<T>();
     }
 
     public Pile2(){
-        // Ã  complÃ©ter
+        // à compléter
+        this(0);
+        
     }
 
     public void empiler(T o) throws PilePleineException{
-        // Ã  complÃ©ter
+        // à compléter
+        if(estPleine())
+            throw new PilePleineException();
+        stk.push(o);
+        
     }
 
     public T depiler() throws PileVideException{
-        // Ã  complÃ©ter
+        // à compléter
+        if(estVide())
+            throw new PileVideException();
+        return stk.pop();
     }
 
     public T sommet() throws PileVideException{
-        // Ã  complÃ©ter
+        // à compléter
+        return stk.peek();
     }
-
-    // recopier ici toutes les autres mÃ©thodes
-    // qui ne sont pas modifiÃ©es en fonction
-    // du type des Ã©lÃ©ments de la pile
+    public boolean estVide(){
+        return this.stk.empty();
+        
+    }
+    public boolean estPleine(){
+        return this.taille() == this.capacite();
+    }
+    
+    public int capacite(){
+        return this.capacite;
+    }
+    public int taille(){
+        return this.stk.size();    
+    }
+    
+    public String toString(){
+        String s = "[";
+        // a completer
+        for (int i = this.taille() - 1; i >= 0; i--) {
+            s += this.stk.elementAt(i).toString();
+            if (i > 0)
+                s += ", ";
+        }
+        return s + "]";
+    }
+    // recopier ici toutes les autres méthodes
+    // qui ne sont pas modifiées en fonction
+    // du type des éléments de la pile
 
 } // Pile2
